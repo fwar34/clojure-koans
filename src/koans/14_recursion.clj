@@ -1,23 +1,33 @@
 (ns koans.14-recursion
   (:require [koan-engine.core :refer :all]))
 
+;; https://stackoverflow.com/questions/5853726/clojure-koans-recursive-is-even
 (defn is-even? [n]
   (if (= n 0)
-    __
-    (___ (is-even? (dec n)))))
+    true
+    (not (is-even? (dec n)))))
 
 (defn is-even-bigint? [n]
   (loop [n   n
          acc true]
     (if (= n 0)
-      __
+      acc
       (recur (dec n) (not acc)))))
 
 (defn recursive-reverse [coll]
-  __)
+  (loop [coll coll
+         result nil]
+    (if (empty? coll)
+      result
+      (recur (rest coll) (conj result (first coll))))))
 
 (defn factorial [n]
-  __)
+  (loop [n n
+         result 1]
+    (if (= n 0)
+      result
+      (recur (dec n) (* n result))))
+  )
 
 (meditations
   "Recursion ends with a base case"
